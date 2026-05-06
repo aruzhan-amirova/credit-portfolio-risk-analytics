@@ -10,7 +10,7 @@ LEFT JOIN payments AS p
 ON l.loan_id = p.loan_id
 GROUP BY l.loan_id
 ),
-	
+
 dpd30 AS
 (SELECT 
 	DATE_TRUNC('month', l.issue_date)::date AS issue_month,
