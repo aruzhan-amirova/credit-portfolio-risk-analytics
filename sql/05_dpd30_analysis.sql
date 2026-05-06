@@ -15,11 +15,11 @@ dpd30 AS
 (SELECT 
 	DATE_TRUNC('month', l.issue_date)::date AS issue_month,
 	l.product_name,
-	COUNT(DISTINCT l.loan_id) AS issued_loans,
+	COUNT(l.loan_id) AS issued_loans,
 	COALESCE(SUM(l.loan_amount),0) AS total_issued_amount,
-	COALESCE(COUNT(nd.cnt_30),0) AS dpd30_loans
+	COALESCE(SUM(nd.cnt_30),0) AS dpd30_loans
 FROM loans AS l
-JOIN not_doubling AS nd
+LEFT JOIN not_doubling AS nd
 	ON l.loan_id = nd.loan_id
 GROUP BY DATE_TRUNC('month', l.issue_date)::date,
 l.product_name
