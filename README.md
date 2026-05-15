@@ -36,7 +36,11 @@
 - сумма выданных кредитов;
 - approval rate;
 - issue rate;
-- DPD30+ rate.
+- DPD30+ rate;
+- DPD30+ amount share;
+- score-сегмент клиента;
+- vintage month;
+- month-on-book (MOB).
 
 ## Инструменты
 
@@ -59,8 +63,8 @@ Python EDA notebook планируется как следующий этап п
 - `data/` — исходные CSV-файлы;
 - `sql/` — SQL-запросы для создания таблиц, проверки данных и анализа;
 - `insights/` — короткие выводы по результатам анализа;
-- `powerbi/` — Power BI dashboard file and dashboard screenshots;
-- `powerbi/screenshots/` — screenshots of dashboard pages;
+- `powerbi/` — файл Power BI dashboard и скриншоты страниц дашборда;
+- `powerbi/screenshots/` — скриншоты страниц дашборда;
 - `README.md` — описание проекта.
 
 SQL-файлы разделены по смыслу: отдельно создание таблиц, отдельно проверки качества данных и отдельно аналитические запросы. Так проект проще читать и проверять.
@@ -92,12 +96,12 @@ SQL-файлы разделены по смыслу: отдельно созда
 Дальше планирую добавить:
 
 - Python EDA notebook с первичным анализом данных;
-- визуализации по заявкам, выдачам, credit_score, доходу и DPD30+;
+- дополнительные визуализации по credit_score, доходу и DPD30+ в Python;
 - ER-диаграмму и data dictionary;
-- BI-дашборд с ключевыми метриками по кредитному портфелю;
-- скрипт генерации синтетических данных для воспроизводимости проекта.
+- скрипт генерации синтетических данных для воспроизводимости проекта;
+- дополнительные бизнес-выводы по результатам Power BI dashboard.
 
-  ## SQL-анализ
+## SQL-анализ
 
 В проекте подготовлены следующие SQL-файлы:
 
@@ -108,29 +112,30 @@ SQL-файлы разделены по смыслу: отдельно созда
 - `05_dpd30_analysis.sql` — анализ DPD30+;
 - `06_repeat_clients_analysis.sql` — анализ новых и повторных клиентов;
 - `07_vintage_mob_analysis.sql` — vintage / MOB-анализ;
-- `08_client_segment_analysis.sql` — анализ клиентских сегментов по credit_score.
+- `08_client_segment_analysis.sql` — анализ клиентских сегментов по credit_score;
+- `09_powerbi_views.sql` — аналитические SQL views для Power BI dashboard.
 
 ## Power BI Dashboard
 
-Power BI dashboard построен на основе PostgreSQL analytical views из файла `sql/09_powerbi_views.sql`.
+Power BI dashboard построен на основе аналитических PostgreSQL views из файла `sql/09_powerbi_views.sql`.
 
-Вместо подключения визуализаций напрямую к сырым таблицам, для dashboard были подготовлены отдельные BI-ready views:
+Вместо подключения визуализаций напрямую к сырым таблицам, для dashboard были подготовлены отдельные BI-ready views. Это упрощает модель в Power BI и отделяет SQL-логику подготовки данных от визуализации.
 
-| Dashboard page | SQL view | Purpose |
+| Страница dashboard | SQL view | Назначение |
 |---|---|---|
-| Monthly Funnel | `bi_monthly_funnel` | Monthly application funnel: applications, approvals, issued loans, requested amount, issued amount, approval rate and issue rate |
-| Product Risks | `bi_product_risk` | Product-level risk analysis: issued amount, DPD30+ loans, DPD30+ amount, DPD30+ loan rate and DPD30+ amount share |
-| Client Segments | `bi_client_segments` | Client score segment analysis: client count, average credit score, income, issued amount and DPD30+ risk |
-| Vintage / MOB | `bi_vintage_mob` | Vintage/MOB analysis of DPD30+ dynamics by vintage month and month-on-book |
+| Monthly Funnel | `bi_monthly_funnel` | Месячная воронка заявок: заявки, одобрения, выдачи, запрошенная сумма, выданная сумма, approval rate и issue rate |
+| Product Risks | `bi_product_risk` | Анализ риска по кредитным продуктам: сумма выдач, кредиты DPD30+, сумма DPD30+, доля кредитов DPD30+ и доля суммы DPD30+ |
+| Client Segments | `bi_client_segments` | Анализ клиентских score-сегментов: количество клиентов, средний credit_score, средний доход, сумма выдач и риск DPD30+ |
+| Vintage / MOB | `bi_vintage_mob` | Vintage/MOB-анализ динамики DPD30+ по месяцу выдачи кредита и месяцу жизни кредита |
 
-Dashboard pages:
+Страницы dashboard:
 
 1. **Monthly Funnel** — динамика заявок, одобрений и выдач.
 2. **Product Risks** — риск и выдачи по кредитным продуктам.
 3. **Client Segments** — анализ score-сегментов клиентов.
 4. **Vintage / MOB** — DPD30+ по месяцам выдачи и месяцам жизни кредита.
 
-### Dashboard screenshots
+### Скриншоты dashboard
 
 #### Monthly Funnel
 ![Monthly Funnel](powerbi/screenshots/01_monthly_funnel.png)
@@ -141,9 +146,9 @@ Dashboard pages:
 #### Vintage / MOB
 ![Vintage MOB](powerbi/screenshots/04_vintage_mob.png)
 
-## Key dashboard insights
+## Основные выводы по dashboard
 
-- Application funnel shows the difference between submitted applications, approved applications and issued loans over time.
-- Product risk analysis highlights products with higher DPD30+ loan rate and DPD30+ amount share.
-- Client segment analysis shows how credit score groups differ by issued amount, average income and DPD30+ risk.
-- Vintage/MOB matrix helps track how DPD30+ develops across months-on-book for different loan issue months.
+- Воронка заявок показывает разницу между поданными заявками, одобренными заявками и фактически выданными кредитами в динамике.
+- Анализ кредитных продуктов помогает выделить продукты с повышенной долей кредитов DPD30+ и долей суммы DPD30+.
+- Анализ клиентских сегментов показывает, как score-сегменты отличаются по сумме выдач, среднему доходу и уровню DPD30+ риска.
+- Vintage/MOB-матрица помогает отслеживать, как развивается DPD30+ по месяцам жизни кредита для разных месяцев выдачи.
