@@ -142,7 +142,7 @@ Power BI dashboard построен на основе аналитических
 #### Product Risks
 ![Product Risks](powerbi/screenshots/02_product_risks.png)
 #### Client Segments
-![Client Segments](powerbi/screenshots/03_client_segments.png)
+![Client Segments](powerbi/screenshots/03_client_segment.png)
 #### Vintage / MOB
 ![Vintage MOB](powerbi/screenshots/04_vintage_mob.png)
 
