@@ -59,6 +59,8 @@ Python EDA notebook планируется как следующий этап п
 - `data/` — исходные CSV-файлы;
 - `sql/` — SQL-запросы для создания таблиц, проверки данных и анализа;
 - `insights/` — короткие выводы по результатам анализа;
+- `powerbi/` — Power BI dashboard file and dashboard screenshots;
+- `powerbi/screenshots/` — screenshots of dashboard pages;
 - `README.md` — описание проекта.
 
 SQL-файлы разделены по смыслу: отдельно создание таблиц, отдельно проверки качества данных и отдельно аналитические запросы. Так проект проще читать и проверять.
