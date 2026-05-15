@@ -89,7 +89,7 @@ SQL-файлы разделены по смыслу: отдельно созда
   - Product Risks
   - Client Segments
   - Vintage / MOB
-- добавлены screenshots dashboard pages.
+- добавлены скриншоты страниц dashboard.
 
 ## Следующие шаги
 
