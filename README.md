@@ -61,8 +61,10 @@ Python EDA notebook планируется как следующий этап п
 Проект разбит на несколько частей:
 
 - `data/` — исходные CSV-файлы;
-- `sql/` — SQL-запросы для создания таблиц, проверки данных и анализа;
-- `insights/` — короткие выводы по результатам анализа;
+- `sql/` — SQL-запросы для создания таблиц, проверки данных, анализа и подготовки views для Power BI;
+- `insights/` — бизнес-выводы по SQL-анализу и Power BI dashboard;
+- `insights/business_insights.md` — краткое описание бизнес-смысла SQL-анализов;
+- `insights/powerbi_dashboard_insights.md` — выводы по страницам Power BI dashboard;
 - `powerbi/` — файл Power BI dashboard и скриншоты страниц дашборда;
 - `powerbi/screenshots/` — скриншоты страниц дашборда;
 - `README.md` — описание проекта.
@@ -82,14 +84,15 @@ SQL-файлы разделены по смыслу: отдельно созда
 - добавлен vintage / MOB-анализ;
 - добавлен анализ новых и повторных клиентов;
 - добавлен анализ клиентских сегментов по credit_score;
-- добавлена папка `insights/` с бизнес-выводами;
+- добавлена папка `insights/` с бизнес-выводами по SQL-анализу;
+- добавлены выводы по Power BI dashboard;
 - подготовлены SQL views для Power BI dashboard;
 - построен Power BI dashboard на 4 страницы:
   - Monthly Funnel
   - Product Risks
   - Client Segments
   - Vintage / MOB
-- добавлены скриншоты страниц dashboard.
+- добавлены скриншоты страниц дашборда.
 
 ## Следующие шаги
 
