@@ -82,7 +82,7 @@
 - `data/` — исходные CSV-файлы;
 - `sql/` — SQL-запросы для создания таблиц, проверки данных, анализа и подготовки views для Power BI;
 - `insights/` — бизнес-выводы по SQL-анализу и Power BI dashboard;
-- `notebooks/credit_portfolio_eda.ipynb` — Python EDA notebook с проверкой качества данных, сбором аналитической витрины, расчётом метрик и визуализациями;
+- `notebooks/` — Python EDA notebook с проверкой качества данных, сбором аналитической витрины, расчётом метрик и визуализациями;
 - `insights/business_insights.md` — краткое описание бизнес-смысла SQL-анализов;
 - `insights/powerbi_dashboard_insights.md` — выводы по страницам Power BI dashboard;
 - `powerbi/` — файл Power BI dashboard и скриншоты страниц дашборда;
