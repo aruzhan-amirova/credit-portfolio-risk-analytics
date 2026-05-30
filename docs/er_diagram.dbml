@@ -1,0 +1,38 @@
+Table clients {
+  client_id int [pk]
+  birth_date date
+  gender varchar
+  city varchar
+  registration_date date
+  income numeric
+  employment_type varchar
+  credit_score int
+}
+
+Table loan_applications {
+  application_id int [pk]
+  client_id int [ref: > clients.client_id]
+  application_date date
+  product_name varchar
+  requested_amount numeric
+  status varchar
+}
+
+Table loans {
+  loan_id int [pk]
+  application_id int [ref: > loan_applications.application_id]
+  client_id int [ref: > clients.client_id]
+  issue_date date
+  product_name varchar
+  loan_amount numeric
+  interest_rate numeric
+  term_months int
+}
+
+Table payments {
+  payment_id int [pk]
+  loan_id int [ref: > loans.loan_id]
+  payment_date date
+  paid_amount numeric
+  overdue_days int
+}
