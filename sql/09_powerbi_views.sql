@@ -39,7 +39,7 @@ GROUP BY
     l.loan_amount)
   
 SELECT
-    la.product_type,
+    la.product_name,
     COUNT(la.application_id) AS total_applications,
     COUNT(la.application_id) FILTER (WHERE la.status = 'approved') AS approved_applications,
     COUNT(ll.loan_id) AS issued_loans,
